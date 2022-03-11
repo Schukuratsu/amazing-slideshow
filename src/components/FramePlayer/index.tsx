@@ -20,6 +20,8 @@ export function FramePlayer({ frames, fps }: Props) {
 
   /* using separate useEffects for the time increments and autostop because 
   a big delay happens when the "setInterval" needs to be called on every tick. */
+
+  // time increments
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (isPlaying) {
@@ -29,6 +31,7 @@ export function FramePlayer({ frames, fps }: Props) {
     return () => clearInterval(intervalId);
   }, [isPlaying]);
 
+  // autostop functionality
   useEffect(() => {
     if (isOnEndOfFrames && isPlaying) {
       setIsPlaying(false);
@@ -37,7 +40,9 @@ export function FramePlayer({ frames, fps }: Props) {
   }, [isOnEndOfFrames, isPlaying, totalTimeInMiliseconds]);
 
   return (
-    <div className={styles.framePlayer}>
+    <div>
+      <p>*Player size: 720x480</p>
+      <p>*Object-fit: contain</p>
       <img
         src={frames[currentFrame] ?? frames.at(-1)}
         alt="current frame"
