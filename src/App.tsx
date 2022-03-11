@@ -13,7 +13,7 @@ const FRAMES = [
 function App() {
   return (
     <div className="App">
-      <FramePlayer frames={FRAMES} fps={1} />
+      <FramePlayer frames={FRAMES} fps={0.2} />
     </div>
   );
 }
