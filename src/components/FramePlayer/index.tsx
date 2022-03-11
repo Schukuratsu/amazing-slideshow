@@ -63,9 +63,20 @@ export function FramePlayer({ frames, fps }: Props) {
       </div>
       <div>miliseconds: {currentTimeInMiliseconds.toString()}</div>
       <div>
-        <button onClick={() => setIsPlaying((value) => !value)}>
-          {isPlaying ? "Pause" : "Play"}
-        </button>
+        {isOnEndOfFrames ? (
+          <button
+            onClick={() => {
+              setCurrentTimeInMiliseconds(0);
+              setIsPlaying(true);
+            }}
+          >
+            Replay
+          </button>
+        ) : (
+          <button onClick={() => setIsPlaying((value) => !value)}>
+            {isPlaying ? "Pause" : "Play"}
+          </button>
+        )}
       </div>
     </div>
   );
