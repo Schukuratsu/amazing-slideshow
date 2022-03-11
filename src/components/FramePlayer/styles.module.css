@@ -2,4 +2,5 @@
   width: 720px;
   height: 480px;
   object-fit: contain;
+  border: 1px solid #aaa;
 }
