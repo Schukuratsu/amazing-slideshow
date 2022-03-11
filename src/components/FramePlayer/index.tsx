@@ -41,6 +41,19 @@ export function FramePlayer({ frames, fps }: Props) {
         alt="current frame"
         className={styles.frame}
       />
+      <div>
+        <input
+          type="range"
+          min="0"
+          max={frames.length}
+          value={currentFrame}
+          onChange={(evt) =>
+            setCurrentTimeInMiliseconds(
+              (1000 * parseInt(evt.currentTarget.value)) / fps
+            )
+          }
+        />
+      </div>
       <div>{currentTimeInMiliseconds.toString()}</div>
       <div>
         <button onClick={() => setIsPlaying((value) => !value)}>
