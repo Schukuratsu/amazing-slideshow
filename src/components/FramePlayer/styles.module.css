@@ -1,4 +1,5 @@
-.framePlayer{
+.frame{
   width: 720px;
   height: 480px;
+  object-fit: contain;
 }
