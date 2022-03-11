@@ -14,6 +14,10 @@ export function FramePlayer({ frames, fps }: Props) {
 
   const totalTimeInMiliseconds = (1000 * frames.length) / fps;
 
+  const isOnEndOfFrames = currentTimeInMiliseconds >= totalTimeInMiliseconds;
+
+  const currentFrame = Math.floor((fps * currentTimeInMiliseconds) / 1000);
+
   /* using separate useEffects for the time increments and autostop because 
   a big delay happens when the "setInterval" needs to be called on every tick. */
   useEffect(() => {
@@ -26,13 +30,11 @@ export function FramePlayer({ frames, fps }: Props) {
   }, [isPlaying]);
 
   useEffect(() => {
-    if (currentTimeInMiliseconds >= totalTimeInMiliseconds) {
+    if (isOnEndOfFrames && isPlaying) {
       setIsPlaying(false);
       setCurrentTimeInMiliseconds(totalTimeInMiliseconds);
     }
-  }, [currentTimeInMiliseconds, totalTimeInMiliseconds]);
-
-  const currentFrame = Math.floor((fps * currentTimeInMiliseconds) / 1000);
+  }, [isOnEndOfFrames, isPlaying, totalTimeInMiliseconds]);
 
   return (
     <div className={styles.framePlayer}>
@@ -54,7 +56,7 @@ export function FramePlayer({ frames, fps }: Props) {
           }
         />
       </div>
-      <div>{currentTimeInMiliseconds.toString()}</div>
+      <div>miliseconds: {currentTimeInMiliseconds.toString()}</div>
       <div>
         <button onClick={() => setIsPlaying((value) => !value)}>
           {isPlaying ? "Pause" : "Play"}
